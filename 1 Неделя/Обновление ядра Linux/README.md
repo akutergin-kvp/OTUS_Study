@@ -22,6 +22,7 @@ uname -r  - узнать актуальную версия ядра
 mkdir ~/kernel-update && cd ~/kernel-update - создать директорию и перейти в нее
 
 Установка пакетов ядра:
+
 wget https://kernel.ubuntu.com/mainline/v4.4.265/amd64/linux-headers-4.4.265-0404265-generic_4.4.265-0404265.202104071137_amd64.deb
 
 wget https://kernel.ubuntu.com/mainline/v4.4.265/amd64/linux-image-unsigned-4.4.265-0404265-generic_4.4.265-0404265.202104071137_amd64.deb 
