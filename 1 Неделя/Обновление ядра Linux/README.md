@@ -36,4 +36,3 @@ sudo reboot
 
 После ребута системы была выполнена команда uname -r
 ![alt text](image.png)
-
