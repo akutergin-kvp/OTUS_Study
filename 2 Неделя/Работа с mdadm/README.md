@@ -21,7 +21,9 @@
 
 В запущенной системе выподняю команду:
 
-'> sudo lshw -short | grep disk
+```bash
+sudo lshw -short | grep disk
+```
 
 для отображени аппаратных компонентов на виртуальной машине
 
@@ -34,11 +36,15 @@
 
 Для сборки raid массива из нескольки дисков была выполнена команда:
 
-'> sudo mdadm --create --verbose /dev/md0 -l 10 -n 4 /dev/sd{b,c,d,e}
+```bash
+sudo mdadm --create --verbose /dev/md0 -l 10 -n 4 /dev/sd{b,c,d,e}
+```
 
 После сборки RAID массивы выполняю команду:
 
-'> sudo mdadm -D /dev/md0
+```bash
+sudo mdadm -D /dev/md0
+```
 
 >![alt text](image-2.png)
 
@@ -46,13 +52,17 @@
 
 Для выполнения данного задания, мы ломаем один из виртуальных дисков, для этого выполняем команду:
 
-'> sudo mdadm /dev/md127 --fail /dev/sde
+```bash
+sudo mdadm /dev/md127 --fail /dev/sde
+```
 
 >![alt text](image-3.png) 
 
 После этого повторно выполнил команду:
 
-'> sudo mdadm -D /dev/md127
+```bash
+sudo mdadm -D /dev/md127
+```
 
 для того, что бы проанализировать состояние RAID массива
 
@@ -60,8 +70,10 @@
 
 После этого выполняются команды:
 
-'> sudo mdadm /dev/md127 --remove /dev/sde
-'> sudo mdadm /dev/md127 --add /dev/sde
+```bash
+sudo mdadm /dev/md127 --remove /dev/sde
+sudo mdadm /dev/md127 --add /dev/sde
+```
 
 где сперва мы удаляем диск из RAID массива, а после добавляем новый 
 
@@ -77,24 +89,29 @@
 
 Создание раздела GPT на RAID массиве
 
-'> parted -s /dev/md127 mklabel gpt 
+```bash
+parted -s /dev/md127 mklabel gpt 
+```
 
-а далее создаем партиции 
+а далее создаем партиции
 
-'> parted /dev/md127 mkpart primary ext4 0% 20%
-'> parted /dev/md127 mkpart primary ext4 20% 40%
-'> parted /dev/md127 mkpart primary ext4 40% 60%
-'> parted /dev/md127 mkpart primary ext4 60% 80%
-'> parted /dev/md127 mkpart primary ext4 80% 100%
+```bash
+parted /dev/md127 mkpart primary ext4 0% 20%
+parted /dev/md127 mkpart primary ext4 20% 40%
+parted /dev/md127 mkpart primary ext4 40% 60%
+parted /dev/md127 mkpart primary ext4 60% 80%
+parted /dev/md127 mkpart primary ext4 80% 100%
+```
 
 >![alt text](MobaXterm_Personal_25.0_1RqXs5ArKE.png)
 
 Для проверки GPT таблицы, создадим файловые хранилища 
 
-'>for i in $(seq 1 5); do sudo mkfs.ext4 /dev/md127p$i; done
-'>mkdir -p /raid/part{1,2,3,4,5}
-'>for i in $(seq 1 5); do mount /dev/md127p$i /raid/part$i; done
-
+```bash
+for i in $(seq 1 5); do sudo mkfs.ext4 /dev/md127p$i; done
+mkdir -p /raid/part{1,2,3,4,5}
+for i in $(seq 1 5); do mount /dev/md127p$i /raid/part$i; done
+```
 
 >![alt text](MobaXterm_Personal_25.0_wAiozCc5UP.png)
 >![alt text](MobaXterm_Personal_25.0_UVB5bpMjKQ.png)
