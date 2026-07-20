@@ -119,7 +119,8 @@ lvcreate -L 500m -s -n home_snap /dev/otussyst/test
 
 так же тут удаляем часть файлов для того, что бы востановить снапшот
 
-![alt text](image-9.png)
+![alt text](image.png)
+![alt text](image-1.png)
 
 Далее востанавливаем наши файлы из снапшота 
 
